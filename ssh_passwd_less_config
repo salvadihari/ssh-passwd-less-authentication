@@ -6,7 +6,7 @@ cat ~/.ssh/id_rsa.pub | ssh <user>@<slave machine ip> 'cat >> .ssh/authorized_ke
 if you get below error:
 Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 
-then go to the below file
+then go to the below file inyour slave/target server
 vi /etc/ssh/sshd_config
 
 and copy past the below lines in config file
