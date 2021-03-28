@@ -1,0 +1,29 @@
+create ssh-keygen key's in your master server
+then give the below command
+
+cat ~/.ssh/id_rsa.pub | ssh <user>@<slave machine ip> 'cat >> .ssh/authorized_keys && echo "Key copied"'
+
+if you get below error:
+Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+
+then go to the below file
+vi /etc/ssh/sshd_config
+
+and copy past the below lines in config file
+
+PermitRootLogin yes
+PubkeyAuthentication yes
+PasswordAuthentication yes
+
+Now restart the sshd service by below command
+
+systemctl restart sshd
+
+now give the below command
+
+cat ~/.ssh/id_rsa.pub | ssh <user>@<slave machine ip> 'cat >> .ssh/authorized_keys && echo "Key copied"'
+
+now it should copy the ssh pub key to the slave server
+
+do the ssh login to the slave server from master 
+first time it will ask you to enter the password, from next time onwords you can access the server with out any passwd. 
